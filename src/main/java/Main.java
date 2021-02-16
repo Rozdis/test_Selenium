@@ -8,17 +8,6 @@ import java.util.concurrent.TimeUnit;
 
 public class Main {
     public static void main(String[] args){
-        System.setProperty("webdriver.chrome.driver", "D:\\downloads\\chromedriver.exe");
-    WebDriver webDriver = new ChromeDriver();
-    webDriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-
-    webDriver.navigate().to("https://www.google.com/");
-    //webDriver.manage().window().maximize();
-
-    webDriver.findElement(By.name("q")).sendKeys("java");
-        webDriver.findElement(By.name("q")).sendKeys(Keys.ENTER);
-
-    //webDriver.close();
 
     }
 }
