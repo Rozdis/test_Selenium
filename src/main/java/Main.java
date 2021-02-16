@@ -18,7 +18,7 @@ public class Main {
     webDriver.findElement(By.name("q")).sendKeys("java");
         webDriver.findElement(By.name("q")).sendKeys(Keys.ENTER);
 
-    webDriver.close();
+    //webDriver.close();
 
     }
 }
