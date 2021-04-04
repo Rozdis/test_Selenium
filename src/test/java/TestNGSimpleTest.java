@@ -1,47 +1,32 @@
+import actions.Actions;
+import base.BaseTest;
+import enums.Languages;
+import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.testng.Assert;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
+import pages.Pages;
 
-import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
 
+import java.io.File;
+import java.io.IOException;
+import java.util.HashSet;
 import java.util.concurrent.TimeUnit;
 
-import static org.testng.Assert.assertEquals;
 
-public class TestNGSimpleTest {
-    public WebDriver webDriver;
+public class TestNGSimpleTest extends BaseTest {
 
-
-
-    @BeforeTest
-    public void openPage(){
-        System.setProperty("webdriver.chrome.driver", "src/main/resources/chromedriver.exe");
-        webDriver = new ChromeDriver();
-        webDriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-
-        webDriver.navigate().to("https://www.google.com/");
-    }
 
     @Test
-    public void test(){
-        SearchPage searchPage = new SearchPage(webDriver);
-        searchPage.typeQuery("java");
-        searchPage.submitSearch();
-        String expectedTitle = "java - Пошук Google";
-        searchPage.checkPage(expectedTitle);
-
-        System.out.println(webDriver.getTitle());
+    public void test() throws InterruptedException, IOException {
+        Actions.headerActions().chooseLanguage(Languages.EN);
+        Actions.headerActions().executeSearchQuery("DEVELOPER");
+        TimeUnit.SECONDS.sleep(2);
+        System.out.println(Pages.resultSearchPage().getListOfResults());
+        HashSet<String> testFile = new HashSet<String>(FileUtils.readLines(new File("test.csv")));
+        HashSet<String> resultFile = new HashSet<String>(FileUtils.readLines(new File("results.csv")));
+        resultFile.removeAll(testFile); // f1 now contains only the lines which are not in f2
+        TimeUnit.SECONDS.sleep(5);
     }
 
-    @AfterTest
-    public void terminateBrowser(){
-        webDriver.close();
-    }
+
 }
