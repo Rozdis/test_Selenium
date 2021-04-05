@@ -9,11 +9,12 @@ import java.util.List;
 
 public class ResultSearchPage extends PageTools {
 
-    private final By allResults = By.xpath("//div[@class='pure-u-xs-1']");
+    private final By allResults = By.xpath("//section[@id='section-search']/div/div/div[@class='pure-u-xs-1']");
 
 
     public List<String> getListOfResults(){
         List<String> results = new ArrayList<>();
+
         for (WebElement webElement: getElements(allResults)) {
             results.addAll(getResultsAsTitleAndResult(webElement.getText()));
         }

@@ -1,14 +1,14 @@
 package base;
 
+import org.junit.After;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeTest;
 import utils.Constants;
+import org.junit.Before;
 
 public class BaseTest extends PageTools{
 
-    @BeforeTest
+    @Before
     public void openPage(){
         System.setProperty("webdriver.chrome.driver", "src/main/resources/chromedriver.exe");
         webDriver = new ChromeDriver();
@@ -16,7 +16,7 @@ public class BaseTest extends PageTools{
         webDriver.manage().window().setSize(new Dimension(1920, 1080));
     }
 
-    @AfterTest
+    @After
     public void terminateBrowser(){
         webDriver.close();
     }
